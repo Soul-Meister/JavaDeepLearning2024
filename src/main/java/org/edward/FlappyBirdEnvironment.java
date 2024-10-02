@@ -18,11 +18,13 @@ public class FlappyBirdEnvironment {
     }
 
     public double[] normalize(double[] data, double min, double max) {
-        double[] normalizedData = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            normalizedData[i] = (data[i] - min) / (max - min);
-        }
-        return normalizedData;
+
+
+        //double[] normalizedData = new double[data.length];
+        //for (int i = 0; i < data.length; i++) {
+        //normalizedData[i] = (data[i] - min) / (max - min);
+        //}
+        return data;
     }
 
 

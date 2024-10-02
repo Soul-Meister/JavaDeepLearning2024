@@ -32,7 +32,7 @@ public class AdamOptimizer implements Optimizer {
                 double delta = neuron.getDelta();
 
                 // Clip gradients
-                //delta = clipGradient(delta);
+                delta = clipGradient(delta);
 
                 for (int k = 0; k < neuron.getWeights().length; k++) {
                     double grad = delta * previousLayerOutputs[k];

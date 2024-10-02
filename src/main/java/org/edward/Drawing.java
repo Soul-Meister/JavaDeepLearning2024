@@ -188,7 +188,7 @@ public class Drawing extends Canvas {
 
         if(score > tempScore){
             tempScore = score;
-            return 1000; // Increase reward for passing through walls
+            return 400; // Increase reward for passing through walls
         }
 
         if(Player.py < -50){
@@ -331,7 +331,7 @@ public class Drawing extends Canvas {
         // Move the walls and handle scoring
         for (Wall wall : walls) {
             wall.move();
-            if (wall.getX() > Player.px - 30 && wall.getX() < Player.px + 30 && !wall.isScored) {
+            if (wall.getX()+35 > Player.px - 30 && wall.getX() < Player.px + 30 && !wall.isScored) {
                 wall.isScored = true;
                 Player.score++;
             }

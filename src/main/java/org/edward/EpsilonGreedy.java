@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class EpsilonGreedy {
+public class EpsilonGreedy implements Policy{
     private double epsilon;
     private double decayRate;
     private double minEpsilon;

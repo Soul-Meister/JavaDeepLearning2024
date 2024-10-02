@@ -6,7 +6,7 @@ public class ReinforcementLearning {
     private final Optimizer optimizer; // Reference to optimizer
     private double gamma = 0.96; // Discount factor for future rewards
     private HuberLoss huberLoss = new HuberLoss(1, .01);
-    private double learningRate = 0.001;
+    private double learningRate = 0.0005;
     private ReplayBuffer replayBuffer = new ReplayBuffer(5000, 0.7); // Adjust the buffer size as needed
     private int batchSize = 64; // Define the size of the training batch
 
@@ -16,12 +16,13 @@ public class ReinforcementLearning {
     public ReinforcementLearning() {
         optimizer = new AdamOptimizer(learningRate);
         nn = new NeuralNetwork(new LeakyReLUActivation(0.01), huberLoss, optimizer);
-        nn.addLayer(12, 4); // First hidden layer with 12 neurons and 2 inputs
+        nn.addLayer(12, 4); //first layer
         nn.addLayer(12, 12);
-        nn.addLayer(16, 12);// second hidden layer with 12x8 neurons
-        nn.addLayer(2, 16); // Output layer with 2 neuron (Q-value) and 8 inputs from the previous layer
+        nn.addLayer(24,12);
+        nn.addLayer(16, 24);
+        nn.addLayer(2, 16); // Output layer with 2 neuron (Q-value)
 
-        policy = new EpsilonGreedy(0.7, 0.9999, 0.0005); // Epsilon decay over time
+        policy = new EpsilonGreedy(0.7, 0.99995, 0.0005);
     }
 
 

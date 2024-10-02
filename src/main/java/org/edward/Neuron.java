@@ -2,7 +2,6 @@ package org.edward;
 
 import java.util.Random;
 
-
 public class Neuron {
     private double[] weights;
     private double bias;
@@ -15,14 +14,18 @@ public class Neuron {
         return activationFunction;
     }
 
+    // Constructor to create a Neuron with a given number of inputs, without initializing weights
     public Neuron(int numInputs) {
-        Random rand = new Random();
         weights = new double[numInputs];
-        double stddev = Math.sqrt(1.0 / numInputs); // Xavier initialization standard deviation
-        for (int i = 0; i < numInputs; i++) {
-            weights[i] = rand.nextGaussian() * stddev; // Initialize weights using Xavier initialization
+        bias = 0.0; // Default bias value, will be set later
+    }
+
+    // Method to initialize weights and bias using He initialization
+    public void initializeWeights(double stddev, Random rand) {
+        for (int i = 0; i < weights.length; i++) {
+            weights[i] = rand.nextGaussian() * stddev;
         }
-        bias = rand.nextGaussian() * stddev; // Initialize bias using the same standard deviation
+        bias = rand.nextGaussian() * stddev;
     }
 
     public double activate(double[] inputs, ActivationFunction activationFunction) {
@@ -34,7 +37,6 @@ public class Neuron {
         output = activationFunction.activate(sum);
         return output;
     }
-
 
     public double[] getWeights() {
         return weights;
