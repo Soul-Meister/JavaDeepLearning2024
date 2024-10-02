@@ -194,13 +194,13 @@ public class Drawing extends Canvas {
         if(Player.py < -50){
             restart();
             Player.jump(jumpParts);
-            return -10; // Stronger penalty for flying too high
+            return -75; // Stronger penalty for flying too high
         }
 
         if(Player.py > 1050){
             restart();
             Player.jump(jumpParts);
-            return -10; // Stronger penalty for flying too low
+            return -75; // Stronger penalty for flying too low
         }
 
         return calculateAlignmentReward(Player.py, getPointForClosestWall(), 500) + 1; // Small reward for staying alive based off alignment

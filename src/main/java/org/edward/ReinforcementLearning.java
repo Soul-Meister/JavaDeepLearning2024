@@ -2,11 +2,11 @@ package org.edward;
 
 public class ReinforcementLearning {
     private final NeuralNetwork nn;
-    private final EpsilonGreedy policy;
+    private final Policy policy;
     private final Optimizer optimizer; // Reference to optimizer
-    private double gamma = 0.96; // Discount factor for future rewards
+    private double gamma = 0.90; // Discount factor for future rewards
     private HuberLoss huberLoss = new HuberLoss(1, .01);
-    private double learningRate = 0.0005;
+    private double learningRate = 0.001;
     private ReplayBuffer replayBuffer = new ReplayBuffer(5000, 0.7); // Adjust the buffer size as needed
     private int batchSize = 64; // Define the size of the training batch
 
@@ -18,11 +18,10 @@ public class ReinforcementLearning {
         nn = new NeuralNetwork(new LeakyReLUActivation(0.01), huberLoss, optimizer);
         nn.addLayer(12, 4); //first layer
         nn.addLayer(12, 12);
-        nn.addLayer(24,12);
-        nn.addLayer(16, 24);
+        nn.addLayer(16, 12);
         nn.addLayer(2, 16); // Output layer with 2 neuron (Q-value)
 
-        policy = new EpsilonGreedy(0.7, 0.99995, 0.0005);
+        policy = new BoltzmannPolicy(3, 0.99995, 0.2);
     }
 
 
@@ -67,9 +66,9 @@ public class ReinforcementLearning {
                 }
             }
 
-            System.out.print("\rEpsilon: " + policy.getEpsilon() + "  qValue[0]: " + qValues[0] + "  qValues[1]: " + qValues[1] + "  Reward: " + reward);
+            System.out.print("\rDelta: " + policy.getDelta() + "  qValue[0]: " + qValues[0] + "  qValues[1]: " + qValues[1] + "  Reward: " + reward);
             // Decay epsilon to reduce exploration over time
-            policy.decayEpsilon();
+            policy.decayDelta();
 
             // Update the game state (restart if game is over)
             game.updateState();

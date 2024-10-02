@@ -1,9 +1,6 @@
 package org.edward;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Random;
-import java.util.stream.IntStream;
 
 public class EpsilonGreedy implements Policy{
     private double epsilon;
@@ -59,7 +56,7 @@ public class EpsilonGreedy implements Policy{
         return maxIndex;
     }
 
-    public void decayEpsilon() {
+    public void decayDelta() {
         if (epsilon > minEpsilon) {
             epsilon *= decayRate;
             if (epsilon < minEpsilon) {
@@ -68,7 +65,7 @@ public class EpsilonGreedy implements Policy{
         }
     }
 
-    public double getEpsilon() {
+    public double getDelta() {
         return epsilon;
     }
 }

@@ -46,7 +46,7 @@ public class BoltzmannPolicy implements Policy {
     }
 
     // Decay the temperature over time to reduce exploration
-    public void decayTemperature() {
+    public void decayDelta() {
         if (temperature > minTemperature) {
             temperature *= decayRate;
             if (temperature < minTemperature) {
@@ -56,7 +56,7 @@ public class BoltzmannPolicy implements Policy {
     }
 
     // Get the current temperature
-    public double getTemperature() {
+    public double getDelta() {
         return temperature;
     }
 }
